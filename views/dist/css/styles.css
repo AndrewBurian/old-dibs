@@ -7,3 +7,16 @@
     padding-top: 20%; }
   .loginPage .btn-primary {
     background-color: #3498db; }
+
+.frontPage .navbar-inverse {
+  background-color: #2980B9;
+  border-color: #2980B9; }
+
+.frontPage .topContainer {
+  text-align: center; }
+
+.level2 {
+  background-color: #2980B9;
+  color: white;
+  text-align: center;
+  padding: 2.5%; }

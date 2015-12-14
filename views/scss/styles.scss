@@ -16,3 +16,25 @@ $matureBlue: #2980B9;
 		background-color: $babyBlue;
 	}
 }
+
+.frontPage{
+
+	.navbar-inverse{
+		background-color: $matureBlue;
+		border-color: $matureBlue;
+	}
+	.topContainer{
+		text-align: center;
+
+		#logo{
+
+		}
+	}
+}
+
+.level2{
+	background-color: $matureBlue;
+	color: white;
+	text-align: center;
+	padding: 2.5%;
+}
