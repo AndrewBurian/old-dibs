@@ -61,12 +61,12 @@
         var password = $("#login-pass").val();
         //Post to the server
         // TODO: Testing Only
-        $.post( "http://demo2399371.mockable.io/login", { "username": username, "password": password })
+        $.post( "/auth", { "username": username, "password": password })
           .done(function(data,textStatus) {
             // alert("Response, text status " + textStatus + " Data " + data);
             console.log("Text Status " + textStatus)
             console.log("Data: " + JSON.stringify(data))
-            if(data.authentication == "success"){
+            if(textStatus == "success"){
               console.log("LOGIN SUCCESSFUL!")
               window.location = "/dashboard.html";
             }

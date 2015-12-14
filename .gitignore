@@ -1,2 +1,8 @@
 views/node_modules/
 views/bower_components/
+*.swp
+*~
+*.txt
+*.bak
+dibs
+tests/
