@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Flat UI - Free Bootstrap Framework and Theme</title>
+    <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
+
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+    <link href="docs/assets/css/demo.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="dist/css/styles.css">
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="dist/js/vendor/html5shiv.js"></script>
+      <script src="dist/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="loginPage">
+
+        <div class="loginContainer container">
+          <div class="col-xs-12 col-sm-6 loginImage">
+            <img src="img/icons/svg/book.svg" alt="Book"> <h2>Dibs</h2>
+            <p>Because we can't all have X at Y</p>
+          </div>
+          <div class="col-xs-12 col-sm-6 login-form">
+            <div class="form-group">
+              <input type="text" class="form-control login-field" value="" placeholder="Enter your name" id="login-name" />
+              <label class="login-field-icon fui-user" for="login-name"></label>
+            </div>
+
+            <div class="form-group">
+              <input type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass" />
+              <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+          <a id="btn-login" class="btn btn-primary btn-lg btn-block" href="#">Log in</a>
+            <a class="login-link" href="#">Lost your password?</a>
+        </div>
+
+    <script src="dist/js/vendor/jquery.min.js"></script>
+    <script src="dist/js/vendor/video.js"></script>
+    <script src="dist/js/flat-ui.min.js"></script>
+    <script src="docs/assets/js/application.js"></script>
+
+    <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+
+    //Event handlers
+      $("#btn-login").click(function(){
+        //Get the username + password
+        var username = $("#login-name").val();
+        var password = $("#login-pass").val();
+        //Post to the server
+        $.post( "/login", { username: username, password: password })
+          .done(function(data,textStatus) {
+            alert("Response, text status " + textStatus + " Data " + data);
+
+            //If the login is successful, load the /dashboard page.
+
+            //Else display an error message
+          })
+          .fail(function(){
+            alert("Failed");
+          })
+      })
+    });
+    </script>
+
+  </body>
+</html>

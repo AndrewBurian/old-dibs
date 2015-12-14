@@ -1,0 +1,9 @@
+.loginPage {
+  background-color: #2980B9; }
+  .loginPage .loginImage {
+    text-align: center;
+    color: white; }
+  .loginPage .loginContainer {
+    padding-top: 20%; }
+  .loginPage .btn-primary {
+    background-color: #3498db; }

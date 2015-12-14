@@ -7,7 +7,7 @@ var browserSync = require('browser-sync');
 gulp.task('sass', function(){
   return gulp.src('scss/styles.scss')
     .pipe(sass()) // Converts Sass to CSS with gulp-sass
-    .pipe(gulp.dest('css/'))
+    .pipe(gulp.dest('dist/css/'))
     .pipe(browserSync.reload({
       stream: true
     })) 
@@ -24,5 +24,5 @@ gulp.task('browserSync', function() {
 gulp.task('watch', ['browserSync', 'sass'], function (){
   gulp.watch('scss/styles.scss', ['sass']); 
   gulp.watch('*.html', browserSync.reload); 
-  gulp.watch('js/**/*.js', browserSync.reload);
+  gulp.watch('*.js', browserSync.reload);
 });
