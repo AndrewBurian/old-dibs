@@ -1,3 +1,10 @@
+a {
+  color: #3498db; }
+
+.navbar-inverse {
+  background-color: #2980B9;
+  border-color: #2980B9; }
+
 .loginPage {
   background-color: #2980B9; }
   .loginPage .loginImage {
@@ -15,8 +22,14 @@
 .frontPage .topContainer {
   text-align: center; }
 
-.level2 {
+.frontPage .level2 {
   background-color: #2980B9;
   color: white;
   text-align: center;
   padding: 2.5%; }
+
+.frontPage table th {
+  text-align: center; }
+
+.resources table th {
+  text-align: none; }

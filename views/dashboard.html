@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dibs - A Family Resource Sharing App</title>
+    <meta name="description" content="Dibs. A family resource sharing application for winning families"
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+    <link href="docs/assets/css/demo.css" rel="stylesheet">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="dist/css/dashboard.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="dist/css/styles.css">
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="dist/js/vendor/html5shiv.js"></script>
+      <script src="dist/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="frontPage">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Dibs</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="sidebarParent active"><a href="/dashboard.html">Dashboard <span class="sr-only">(current)</span></a></li>
+            
+            <li class="sidebarParent"><a href="/resources.html">Resources</a></li>
+            <li class="sidebarParent"><a href="/bookings.html">Bookings</a></li>
+            <li class="sidebarParent"><a href="/people.html">People</a></li>
+          </ul>
+         
+          
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-12 col-sm-6 placeholder">
+              <a href="/resources.html"><img src="img/icons/svg/paper-bag.svg" width="100" height="100" class="img-responsive" alt="Generic placeholder thumbnail"/></a>
+              <h4><a href="/resources.html">Resources</a></h4>
+              <span class="text-muted">Find stuff</span>
+            </div>
+            <div class="col-xs-12 col-sm-6 placeholder">
+             <a href="/bookings.html"><img src="img/icons/svg/calendar.svg" width="100" height="100" class="img-responsive" alt="Generic placeholder thumbnail"/></a>
+              <h4><a href="/bookings.html">Bookings</a></h4>
+              <span class="text-muted">Check when things go out / come in</span>
+            </div>
+
+          <h2 class="sub-header">Bookings at-a-glance</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>From</th>
+                  <th>Till</th>
+                  <th>Resource</th>
+                  <th>Who</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Sun, Dec 14th 2015 7:00PM</td>
+                  <td>Sun, Dec 14th 2015 11:00PM</td>
+                  <td><a href="">Truck</a></td>
+                  <td><a href="">Andrew</a></td>
+                  <td>Going to Ibiza</td>
+                </tr>       
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script src="dist/js/vendor/jquery.min.js"></script>
+    <script src="dist/js/vendor/video.js"></script>
+    <script src="dist/js/flat-ui.min.js"></script>
+    <script src="docs/assets/js/application.js"></script>
+
+    <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        
+        //Event handler
+
+    
+    });
+    </script>
+
+  </body>
+</html>

@@ -60,9 +60,19 @@
         var username = $("#login-name").val();
         var password = $("#login-pass").val();
         //Post to the server
-        $.post( "/login", { username: username, password: password })
+        // TODO: Testing Only
+        $.post( "http://demo2399371.mockable.io/login", { "username": username, "password": password })
           .done(function(data,textStatus) {
-            alert("Response, text status " + textStatus + " Data " + data);
+            // alert("Response, text status " + textStatus + " Data " + data);
+            console.log("Text Status " + textStatus)
+            console.log("Data: " + JSON.stringify(data))
+            if(data.authentication == "success"){
+              console.log("LOGIN SUCCESSFUL!")
+              window.location = "/dashboard.html";
+            }
+            else{
+              alert("Login Unsucessful. Please try again")
+            }
 
             //If the login is successful, load the /dashboard page.
 

@@ -1,6 +1,18 @@
 $babyBlue: #3498db;
 $matureBlue: #2980B9;
 
+//GLOBALS
+a{
+	color: $babyBlue
+}
+
+.navbar-inverse{
+		background-color: $matureBlue;
+		border-color: $matureBlue;
+	}
+
+//Specifics
+
 .loginPage{
 	background-color: $matureBlue;
 	
@@ -17,6 +29,8 @@ $matureBlue: #2980B9;
 	}
 }
 
+
+//Front Page Styles
 .frontPage{
 
 	.navbar-inverse{
@@ -30,11 +44,27 @@ $matureBlue: #2980B9;
 
 		}
 	}
+
+
+	.level2{
+		background-color: $matureBlue;
+		color: white;
+		text-align: center;
+		padding: 2.5%;
+	}
+
+	table{
+		th{
+			text-align: center;
+		}
+	}
 }
 
-.level2{
-	background-color: $matureBlue;
-	color: white;
-	text-align: center;
-	padding: 2.5%;
+//Resources Page Styles
+.resources{
+	table{
+		th{
+			text-align: none;
+		}
+	}
 }

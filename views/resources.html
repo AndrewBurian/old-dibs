@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dibs - A Family Resource Sharing App</title>
+    <meta name="description" content="Dibs. A family resource sharing application for winning families"
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+    <link href="docs/assets/css/demo.css" rel="stylesheet">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="dist/css/dashboard.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="dist/css/styles.css">
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="dist/js/vendor/html5shiv.js"></script>
+      <script src="dist/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="resources">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Dibs</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="sidebarParent"><a href="/dashboard.html">Dashboard <span class="sr-only">(current)</span></a></li>
+            
+            <li class="sidebarParent active"><a href="/resources.html">Resources</a></li>
+            <li class="sidebarParent"><a href="/bookings.html">Bookings</a></li>
+            <li class="sidebarParent"><a href="/people.html">People</a></li>
+          </ul>
+         
+          
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Resources</h1>
+
+          <!-- Tabs -->
+          <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#mine" aria-controls="mine" role="tab" data-toggle="tab">Mine</a></li>
+              <li role="presentation"><a href="#add" aria-controls="add" role="tab" data-toggle="tab">Add</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="mine">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Resource</th>
+                      <th>Date Added</th>
+                      <th>Status</th>
+                      <th>Last Used</th>
+                      <th>Next Booking</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Truck</td>
+                      <td>Sun, Dec 14th 2015 4:00PM</td>
+                      <td>Out</td>
+                      <td>Sun, Dec 14th 2015 6:00PM </td>
+                      <td>-</td>
+                    </tr>       
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="add">
+                <br>
+                  <div class="addResourceFormContainer">
+                    <!-- Field 1 -->
+                    <div class="col-xs-12 col-sm-6 form-group">
+                      <h5>Resource Name</h5>
+                      <input type="text" class="form-control login-field" value="" placeholder="What is the name of the resource? i.e. 'Car'" id="login-name" />
+                    </div>
+
+                    <!-- Field 2 -->
+                    <div class="col-xs-12 col-sm-6 form-group">
+                      <h5>Resource Availibility</h5>
+                      <input type="text" class="form-control login-field" value="" placeholder="When will your resource ba vailable?" id="login-pass" />
+                  </div>
+                  
+                  <!-- Submit button -->
+                  <a align="right" class="btn pull-right btn-primary btn-lg" href="#">Add</a>
+
+              </div>
+            </div>
+
+      </div>
+    </div>
+
+
+
+    <script src="dist/js/vendor/jquery.min.js"></script>
+    <script src="dist/js/vendor/video.js"></script>
+    <script src="dist/js/flat-ui.min.js"></script>
+    <script src="docs/assets/js/application.js"></script>
+
+    <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        
+        //Event handler
+
+    
+    });
+    </script>
+
+  </body>
+</html>
