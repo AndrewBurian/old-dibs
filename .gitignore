@@ -6,3 +6,5 @@ views/bower_components/
 *.bak
 dibs
 tests/
+.vagrant/
+makefile
