@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/andrewburian/crypter"
+	"golang.org/x/crypto/bcrypt"
 	"io"
 	"net/http"
 )
@@ -16,6 +17,7 @@ const (
 
 type authHandler struct {
 	crypto *crypter.Crypter
+	db     *dbManager
 }
 
 func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -30,22 +32,44 @@ func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(r.FormValue("password")) < 6 {
+	if len(r.FormValue("username")) == 0 {
 		w.WriteHeader(UNAUTHORIZED)
-		io.WriteString(w, "Password must be at least 6 characters")
-	}
-
-	// TODO DB auth
-	auth := true
-
-	// failed to login
-	if !auth {
-		w.WriteHeader(UNAUTHORIZED)
-		w.Write([]byte("Username or Password incorrect"))
+		io.WriteString(w, "No username specified")
 		return
 	}
 
-	session["uname"] = r.FormValue("username")
+	if len(r.FormValue("password")) < 6 {
+		w.WriteHeader(UNAUTHORIZED)
+		io.WriteString(w, "Password must be at least 6 characters")
+		return
+	}
+
+	// DB auth
+	uid, err := h.db.getUserId(r.FormValue("username"))
+	if err != nil {
+		w.WriteHeader(UNAUTHORIZED)
+		//io.WriteString(w, "Username or Password incorrect")
+		io.WriteString(w, "User not found")
+		return
+	}
+
+	hash, err := h.db.getUserHash(uid)
+	if err != nil {
+		w.WriteHeader(ERROR)
+		io.WriteString(w, "Error retrieving password hash")
+		return
+	}
+
+	// password check
+	err = bcrypt.CompareHashAndPassword(hash, []byte(r.FormValue("password")))
+	if err != nil {
+		w.WriteHeader(UNAUTHORIZED)
+		io.WriteString(w, "Username or Password incorrect")
+		return
+	}
+
+	// setup session
+	session["uid"] = string(uid)
 
 	setSession(w, h.crypto, session)
 

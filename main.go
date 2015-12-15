@@ -16,13 +16,25 @@ func main() {
 	mac := []byte("cryptomackey")
 	iv := []byte("1234567890123456")
 
+	fmt.Println("Setting up crypto")
 	crypto, err := crypter.NewCrypter(key, mac, iv)
 	if err != nil {
 		panic(err)
 	}
 
+	// Setup database
+	dbuser := "dibsagent"
+	dbpassword := "agentpassword"
+	dbname := "dibs"
+
+	fmt.Println("Connecting to database")
+	db, err := newDbManager(dbuser, dbpassword, dbname, 2)
+	if err != nil {
+		panic(err)
+	}
+
 	// REST endpoint handlers
-	auth := &authHandler{crypto}
+	auth := &authHandler{crypto, db}
 	http.Handle("/auth", auth)
 
 	fmt.Println("Starting server!")

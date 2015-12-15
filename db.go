@@ -77,5 +77,29 @@ func (db *dbManager) getUserId(username string) (int, error) {
 }
 
 func (db *dbManager) getUserHash(uid int) ([]byte, error) {
-	return nil, nil
+	// get handle on a connection
+	handle := db.getHandle()
+	defer db.returnHandle(handle)
+
+	// query
+	rows, err := handle.Query("SELECT password FROM users WHERE id=?", uid)
+	defer rows.Close()
+
+	// error checks
+	if err != nil {
+		return nil, err
+	}
+
+	if !rows.Next() {
+		return nil, io.EOF
+	}
+
+	// scan uid
+	var hash []byte
+	err = rows.Scan(&hash)
+	if err != nil {
+		return nil, err
+	}
+
+	return hash, nil
 }
