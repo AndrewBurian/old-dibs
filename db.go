@@ -9,10 +9,10 @@ import (
 
 type dbManager struct {
 	handles []*sql.DB
-	pool    chan uint
+	pool    chan int
 }
 
-func newDbManager(dbuser, dbpassword, dbname string, poolSize uint) (*dbManager, error) {
+func newDbManager(dbuser, dbpassword, dbname string, poolSize int) (*dbManager, error) {
 
 	var manager dbManager
 
@@ -20,7 +20,8 @@ func newDbManager(dbuser, dbpassword, dbname string, poolSize uint) (*dbManager,
 	connStr := fmt.Sprintf("user=%s password=%s dbname=%s", dbuser, dbpassword, dbname)
 
 	// init the pool of connections
-	for i := uint(0); i < poolSize; i++ {
+	manager.pool = make(chan int, poolSize)
+	for i := int(0); i < poolSize; i++ {
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			return nil, err
@@ -37,9 +38,19 @@ func (db *dbManager) getHandle() *sql.DB {
 	return db.handles[i]
 }
 
-func (db *dbManager) getUserId(username string) (uint, error) {
+func (db *dbManager) returnHandle(handle *sql.DB) {
+	for i, h := range db.handles {
+		if h == handle {
+			db.pool <- i
+			return
+		}
+	}
+}
+
+func (db *dbManager) getUserId(username string) (int, error) {
 	// get handle on a connection
 	handle := db.getHandle()
+	defer db.returnHandle(handle)
 
 	// query
 	rows, err := handle.Query("SELECT id FROM users WHERE name=?", username)
@@ -55,7 +66,7 @@ func (db *dbManager) getUserId(username string) (uint, error) {
 	}
 
 	// scan uid
-	var uid uint
+	var uid int
 	err = rows.Scan(&uid)
 	if err != nil {
 		return 0, err
@@ -65,8 +76,6 @@ func (db *dbManager) getUserId(username string) (uint, error) {
 
 }
 
-/*
-func (db *dbManager) getUserHash(uid uint) ([]byte, error) {
-
+func (db *dbManager) getUserHash(uid int) ([]byte, error) {
+	return nil, nil
 }
-*/
