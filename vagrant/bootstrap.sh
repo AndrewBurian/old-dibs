@@ -113,7 +113,7 @@ echo ""
 print_db_usage
 
 #Set-Up phppgadmin
-apt-get -y phppgadmin
+apt-get install -y phppgadmin
 
 #Echo into file
 echo "Alias /phppgadmin /usr/share/phppgadmin
@@ -160,4 +160,7 @@ echo "<Directory \"/usr/share/phpPgAdmin\">
 
 #Create the links
 cp /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
+
+#Start apache
+service apache2 start
 
