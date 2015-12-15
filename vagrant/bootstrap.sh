@@ -111,3 +111,53 @@ date > "$PROVISIONED_ON"
 echo "Successfully created PostgreSQL dev virtual machine."
 echo ""
 print_db_usage
+
+#Set-Up phppgadmin
+apt-get -y phppgadmin
+
+#Echo into file
+echo "Alias /phppgadmin /usr/share/phppgadmin
+
+<Directory /usr/share/phppgadmin>
+
+DirectoryIndex index.php
+AllowOverride None
+
+order deny,allow
+deny from all
+allow from 127.0.0.0/255.0.0.0 ::1/128
+allow from all
+
+<IfModule mod_php5.c>
+  php_flag magic_quotes_gpc Off
+  php_flag track_vars On
+  #php_value include_path .
+</IfModule>
+<IfModule !mod_php5.c>
+  <IfModule mod_actions.c>
+    <IfModule mod_cgi.c>
+      AddType application/x-httpd-php .php
+      Action application/x-httpd-php /cgi-bin/php
+    </IfModule>
+    <IfModule mod_cgid.c>
+      AddType application/x-httpd-php .php
+      Action application/x-httpd-php /cgi-bin/php
+    </IfModule>
+  </IfModule>
+</IfModule>
+
+</Directory>" > /etc/apache2/conf.d/phppgadmin
+
+
+#Echo into config
+echo "<Directory \"/usr/share/phpPgAdmin\">
+        AuthUserFile /etc/phpPgAdmin/.htpasswd
+        AuthName \"Restricted Area\"
+        AuthType Basic
+        require valid-user
+</Directory>" > /etc/apache2/sites-enabled/000-default
+
+
+#Create the links
+cp /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
+

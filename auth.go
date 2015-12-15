@@ -32,7 +32,7 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 
 	if r.PostFormValue("username") == "admin" && r.PostFormValue("password") == "pass" {
 		fmt.Println("Welcome admin!")
-		w.Write([]byte(`{"autentication":"success"}`))
+		w.Write([]byte(`{"authentication":"success"}`))
 	} else {
 		w.WriteHeader(UNAUTHORIZED)
 		fmt.Println(r.PostForm)
