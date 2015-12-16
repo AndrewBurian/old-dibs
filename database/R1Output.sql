@@ -4,22 +4,14 @@
 -- MySQL Workbench Forward Engineering
 
 
--- -----------------------------------------------------
--- Schema dibs
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS "dibs" CASCADE;
+
 
 -- -----------------------------------------------------
--- Schema dibs
+-- Table "Users"
 -- -----------------------------------------------------
-CREATE SCHEMA  "dibs"  ;
+DROP TABLE IF EXISTS "Users" CASCADE;
 
--- -----------------------------------------------------
--- Table "dibs"."Users"
--- -----------------------------------------------------
-DROP TABLE IF EXISTS "dibs"."Users" CASCADE;
-
-CREATE TABLE  "dibs"."Users" (
+CREATE TABLE  "Users" (
   "ID" SERIAL NOT NULL ,
   "Username" VARCHAR(32) NOT NULL,
   "Alias" VARCHAR(128) NOT NULL,
@@ -29,11 +21,11 @@ CREATE TABLE  "dibs"."Users" (
 
 
 -- -----------------------------------------------------
--- Table "dibs"."Resources"
+-- Table "Resources"
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS "dibs"."Resources" CASCADE;
+DROP TABLE IF EXISTS "Resources" CASCADE;
 
-CREATE TABLE  "dibs"."Resources" (
+CREATE TABLE  "Resources" (
   "ID" SERIAL NOT NULL ,
   "Owner" INT NOT NULL,
   "Name" VARCHAR(128) NOT NULL,
@@ -41,17 +33,17 @@ CREATE TABLE  "dibs"."Resources" (
   PRIMARY KEY ("ID"),
   CONSTRAINT "OwnerID"
     FOREIGN KEY ("Owner")
-    REFERENCES "dibs"."Users" ("ID")
+    REFERENCES "Users" ("ID")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table "dibs"."Bookings"
+-- Table "Bookings"
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS "dibs"."Bookings" CASCADE;
+DROP TABLE IF EXISTS "Bookings" CASCADE;
 
-CREATE TABLE  "dibs"."Bookings" (
+CREATE TABLE  "Bookings" (
   "ID" SERIAL NOT NULL ,
   "User" INT NOT NULL,
   "ResourceID" INT NOT NULL,
@@ -61,33 +53,33 @@ CREATE TABLE  "dibs"."Bookings" (
   PRIMARY KEY ("ID"),
   CONSTRAINT "UserID"
     FOREIGN KEY ("User")
-    REFERENCES "dibs"."Users" ("ID")
+    REFERENCES "Users" ("ID")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT "ResourceID"
     FOREIGN KEY ("ResourceID")
-    REFERENCES "dibs"."Resources" ("ID")
+    REFERENCES "Resources" ("ID")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table "dibs"."Shares"
+-- Table "Shares"
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS "dibs"."Shares" CASCADE;
+DROP TABLE IF EXISTS "Shares" CASCADE;
 
-CREATE TABLE  "dibs"."Shares" (
+CREATE TABLE  "Shares" (
   "ResourceID" INT NOT NULL,
   "UserID" INT NOT NULL,
   PRIMARY KEY ("ResourceID", "UserID"),
   CONSTRAINT "ResourceID"
     FOREIGN KEY ("ResourceID")
-    REFERENCES "dibs"."Resources" ("ID")
+    REFERENCES "Resources" ("ID")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT "UserID"
     FOREIGN KEY ("UserID")
-    REFERENCES "dibs"."Users" ("ID")
+    REFERENCES "Users" ("ID")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
