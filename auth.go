@@ -50,6 +50,7 @@ func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(UNAUTHORIZED)
 		//io.WriteString(w, "Username or Password incorrect")
 		io.WriteString(w, "User not found")
+		fmt.Println("User not found")
 		return
 	}
 
@@ -57,6 +58,7 @@ func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(ERROR)
 		io.WriteString(w, "Error retrieving password hash")
+		fmt.Println("Hash error")
 		return
 	}
 
@@ -65,6 +67,7 @@ func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(UNAUTHORIZED)
 		io.WriteString(w, "Username or Password incorrect")
+		fmt.Println("Incorrect password")
 		return
 	}
 

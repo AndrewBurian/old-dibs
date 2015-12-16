@@ -38,5 +38,8 @@ func main() {
 	http.Handle("/auth", auth)
 
 	fmt.Println("Starting server!")
-	http.ListenAndServe(":8080", nil)
+	err = http.ListenAndServe(":8080", nil)
+	if err != nil {
+		panic(err)
+	}
 }

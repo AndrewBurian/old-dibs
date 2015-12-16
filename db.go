@@ -54,14 +54,16 @@ func (db *dbManager) getUserId(username string) (int, error) {
 
 	// query
 	rows, err := handle.Query("SELECT id FROM users WHERE name=?", username)
-	defer rows.Close()
 
 	// error checks
 	if err != nil {
+		fmt.Println(err.Error())
 		return 0, err
 	}
+	defer rows.Close()
 
 	if !rows.Next() {
+		fmt.Println(err.Error())
 		return 0, io.EOF
 	}
 
@@ -69,6 +71,7 @@ func (db *dbManager) getUserId(username string) (int, error) {
 	var uid int
 	err = rows.Scan(&uid)
 	if err != nil {
+		fmt.Println(err.Error())
 		return 0, err
 	}
 
@@ -83,12 +86,12 @@ func (db *dbManager) getUserHash(uid int) ([]byte, error) {
 
 	// query
 	rows, err := handle.Query("SELECT password FROM users WHERE id=?", uid)
-	defer rows.Close()
 
 	// error checks
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	if !rows.Next() {
 		return nil, io.EOF
