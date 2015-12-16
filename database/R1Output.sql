@@ -19,6 +19,7 @@ CREATE TABLE  "Users" (
   "Email" VARCHAR(45) NULL,
   PRIMARY KEY ("ID"));
 
+ALTER TABLE "Users" OWNER TO dibsagent;
 
 -- -----------------------------------------------------
 -- Table "Resources"
@@ -34,9 +35,11 @@ CREATE TABLE  "Resources" (
   CONSTRAINT "OwnerID"
     FOREIGN KEY ("Owner")
     REFERENCES "Users" ("ID")
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION -- TODO cascade
     ON UPDATE NO ACTION);
 
+
+ALTER TABLE "Resources" OWNER TO dibsagent;
 
 -- -----------------------------------------------------
 -- Table "Bookings"
@@ -54,14 +57,16 @@ CREATE TABLE  "Bookings" (
   CONSTRAINT "UserID"
     FOREIGN KEY ("User")
     REFERENCES "Users" ("ID")
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION --TODO This should cascade
     ON UPDATE NO ACTION,
   CONSTRAINT "ResourceID"
     FOREIGN KEY ("ResourceID")
     REFERENCES "Resources" ("ID")
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION --TODO This should cascade
     ON UPDATE NO ACTION);
 
+
+ALTER TABLE "Bookings" OWNER TO dibsagent;
 
 -- -----------------------------------------------------
 -- Table "Shares"
@@ -75,18 +80,27 @@ CREATE TABLE  "Shares" (
   CONSTRAINT "ResourceID"
     FOREIGN KEY ("ResourceID")
     REFERENCES "Resources" ("ID")
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION -- TODO cascade
     ON UPDATE NO ACTION,
   CONSTRAINT "UserID"
     FOREIGN KEY ("UserID")
     REFERENCES "Users" ("ID")
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION -- TODO cascade
     ON UPDATE NO ACTION);
 
 
+ALTER TABLE "Shares" OWNER TO dibsagent;
+
+-- Sequences
 DROP SEQUENCE IF EXISTS "dibs.Users_ID_sequence";
 CREATE SEQUENCE  "dibs.Users_ID_sequence";
 DROP SEQUENCE IF EXISTS "dibs.Resources_ID_sequence";
 CREATE SEQUENCE  "dibs.Resources_ID_sequence";
 DROP SEQUENCE IF EXISTS "dibs.Bookings_ID_sequence";
 CREATE SEQUENCE  "dibs.Bookings_ID_sequence";
+
+-- Test data
+INSERT INTO "Users" 
+  ("Username", "Alias", "Password", "Email")
+  VALUES
+  ("admin", "God", "$2a$10$llL.U6kVd6ZJIbiWtnRqrOFLC612LTu5cXGWyu51N2u4sqaxdgUji", "a@b.com"); 

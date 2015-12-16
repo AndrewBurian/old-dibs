@@ -53,7 +53,7 @@ func (db *dbManager) getUserId(username string) (int, error) {
 	defer db.returnHandle(handle)
 
 	// query
-	rows, err := handle.Query("SELECT id FROM users WHERE name=?", username)
+	rows, err := handle.Query(`SELECT "ID" FROM "Users" WHERE "Username" = $1`, username)
 
 	// error checks
 	if err != nil {
@@ -63,7 +63,6 @@ func (db *dbManager) getUserId(username string) (int, error) {
 	defer rows.Close()
 
 	if !rows.Next() {
-		fmt.Println(err.Error())
 		return 0, io.EOF
 	}
 
@@ -85,7 +84,7 @@ func (db *dbManager) getUserHash(uid int) ([]byte, error) {
 	defer db.returnHandle(handle)
 
 	// query
-	rows, err := handle.Query("SELECT password FROM users WHERE id=?", uid)
+	rows, err := handle.Query(`SELECT "Password" FROM "Users" WHERE "ID" = $1`, uid)
 
 	// error checks
 	if err != nil {

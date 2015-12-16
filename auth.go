@@ -48,9 +48,9 @@ func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	uid, err := h.db.getUserId(r.FormValue("username"))
 	if err != nil {
 		w.WriteHeader(UNAUTHORIZED)
-		//io.WriteString(w, "Username or Password incorrect")
 		io.WriteString(w, "User not found")
 		fmt.Println("User not found")
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -59,6 +59,7 @@ func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(ERROR)
 		io.WriteString(w, "Error retrieving password hash")
 		fmt.Println("Hash error")
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -70,6 +71,8 @@ func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Incorrect password")
 		return
 	}
+
+	fmt.Printf("Successfully authed user %s\n", r.FormValue("username"))
 
 	// setup session
 	session["uid"] = string(uid)
