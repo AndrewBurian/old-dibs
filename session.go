@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/andrewburian/crypter"
 	"net/http"
+	"time"
 )
 
 func getSession(r *http.Request, crypt *crypter.Crypter) (session map[string]string) {
@@ -13,6 +15,7 @@ func getSession(r *http.Request, crypt *crypter.Crypter) (session map[string]str
 	// get the cookie from header
 	cookie, err := r.Cookie("sess")
 	if err != nil {
+		fmt.Println("No sess cookie found")
 		return
 	}
 
@@ -53,9 +56,9 @@ func setSession(w http.ResponseWriter, crypt *crypter.Crypter, session map[strin
 	// add to hreader
 	var cookie http.Cookie
 	cookie.Name = "sess"
-	cookie.MaxAge = 360
-	cookie.Secure = false  // TODO TLS
-	cookie.HttpOnly = true // TODO check if JS can read if true
+	cookie.Expires = time.Now().Add(24 * time.Hour)
+	cookie.Secure = false   // TODO TLS
+	cookie.HttpOnly = false // TODO check if JS can read if true
 	cookie.Value = value
 
 	w.Header().Set("Set-Cookie", cookie.String())

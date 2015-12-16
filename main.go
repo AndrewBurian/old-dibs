@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	// static content
+	// static content (default)
 	http.Handle("/", http.FileServer(http.Dir("./views/")))
 
 	// Setup crypto
@@ -36,6 +36,12 @@ func main() {
 	// REST endpoint handlers
 	auth := &authHandler{crypto, db}
 	http.Handle("/auth", auth)
+
+	login := &loginHandler{crypto}
+	http.Handle("/login", login)
+
+	logout := &logoutHandler{}
+	http.Handle("/logout", logout)
 
 	fmt.Println("Starting server!")
 	err = http.ListenAndServe(":8080", nil)
